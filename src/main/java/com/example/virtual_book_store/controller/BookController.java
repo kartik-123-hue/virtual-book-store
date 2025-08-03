@@ -3,9 +3,7 @@ package com.example.virtual_book_store.controller;
 import com.example.virtual_book_store.entity.Book;
 import com.example.virtual_book_store.service.BookService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +14,16 @@ public class BookController {
     BookService bookService;
     BookController(BookService bookService){
         this.bookService=bookService;
+    }
+
+    @PutMapping("/addBooks")
+    public ResponseEntity<List<Book>> addBooks(@RequestBody  List<Book> books){
+        try {
+            return ResponseEntity.ok(bookService.addBooks(books));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
     }
 
     @GetMapping("/getAllBooks")
