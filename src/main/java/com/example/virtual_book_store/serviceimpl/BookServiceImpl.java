@@ -25,4 +25,13 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Book> addBooks(List<Book> books) {
+       try {
+           return bookRepository.saveAll(books);
+       }catch (DatabaseException e){
+           throw new RuntimeException(e);
+       }
+    }
 }
